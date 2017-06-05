@@ -25,3 +25,6 @@ $ docker-compose up -d
 # check on http://localhost:9090/status (prometheus) and http://localhost:3000/ (grafana)
 ```
 
+## Querying
+
+https://www.digitalocean.com/community/tutorials/how-to-query-prometheus-on-ubuntu-14-04-part-1
