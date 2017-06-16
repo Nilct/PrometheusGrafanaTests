@@ -2,13 +2,6 @@
 
 * [full install](https://finestructure.co/blog/2016/5/16/monitoring-with-prometheus-grafana-docker-part-1) and [part2](https://finestructure.co/blog/2016/6/9/monitoring-with-prometheus-grafana-docker-part-2) (june 2016)
 
-Extract:
-
-* **Prometheus** - this is the central piece, it contains the time series database and the logic of scraping stats from exporters (see below) as well as alerts.
-* **Grafana** is the ‘face’ of Prometheus. While Prometheus exposes some of its internals like settings and the stats it gathers via basic web front-ends, it delegates the heavy lifting of proper graphical displays and dashboards to Grafana.
-* **Alertmanager** manages the routing of alerts which Prometheus raises to various different channels like email, pagers, slack - and so on. So while Prometheus collects stats and raises alerts it is completely agnostic of where these alerts should be displayed. This is where the alertmanager picks up.
-* **Exporters** are http endpoints which expose ‘prometheus metrics’ for scraping by the Prometheus server. What this means is that this is a pull set-up. Note that it is also possible to set up a push-gateway which is essentially an intermediary push target which Prometheus can then scrape. This is useful for scenarios where pull is not appropriate or feasible (for example short lived processes).
-
 A voir (influxDB): [TICK](https://www.influxdata.com/products/open-source/)
 
 ## Extensions
@@ -37,3 +30,9 @@ From <https://stefanprodan.com/2016/a-monitoring-solution-for-docker-hosts-conta
 Make it possible for Prometheus to scrape its target, no matter where it is.
 Authenticate the target, and Prometheus to the target.
 Prevent malicious users from messing with the data in flight.
+
+
+
+* [Blog devops/prometheus](https://www.robustperception.io/tag/prometheus/)
+* [Forum Grafana](https://community.grafana.com/)
+* [Grafana Talk](https://www.brighttalk.com/webcast/14395/252679)

@@ -1,0 +1,8 @@
+ALERT custom
+  IF (sum(rate(http_requests_total[5m]))  > 0.15)
+  FOR 30s
+  LABELS { severity = "warning" }
+  ANNOTATIONS {
+      summary = "Custom alert",
+      description = "(sum(rate(http_requests_total[5m])) > 0.15 Value: {{ humanize $value}}%",
+  }

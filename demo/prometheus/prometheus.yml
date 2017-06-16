@@ -1,0 +1,35 @@
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  external_labels: # used for alerting
+    monitor: 'docker-host-monitor'
+
+rule_files:
+  - "targets.rules"
+  - "host.rules"
+  - "custom.rules"
+
+scrape_configs:
+
+  # automonitoring
+  - job_name: 'prometheus'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # cpu/memory/... monitoring
+  - job_name: 'node-exporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # # docker monitoring
+  # - job_name: 'cadvisor'
+  #   scrape_interval: 5s
+  #   static_configs:
+  #     - targets: ['cadvisor:8080']      
+
+  # custom monitoring (container memory consumption)
+  - job_name: 'dockering'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['192.168.1.129:8083']

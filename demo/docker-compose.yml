@@ -7,7 +7,7 @@ services:
     container_name: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus # a verifier
+      - prometheus_data:/prometheus
     command:
         - '-config.file=/etc/prometheus/prometheus.yml'
         - '-storage.local.path=/prometheus'
@@ -19,7 +19,7 @@ services:
     ports:
       - 9090:9090
     # depends_on:   
-    #   - cadvisor
+    #    - cadvisor
     networks:
       - monitor-net
     labels:
@@ -88,7 +88,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     env_file:
-      - user.config
+      - grafana/user.config
     expose:
       - 3000
     ports:
@@ -98,7 +98,7 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: "monitoring"  
 
 networks:
   monitor-net:
