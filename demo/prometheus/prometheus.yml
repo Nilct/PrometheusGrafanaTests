@@ -7,6 +7,7 @@ rule_files:
   - "targets.rules"
   - "host.rules"
   - "custom.rules"
+  - "my_rules.rules"
 
 scrape_configs:
 

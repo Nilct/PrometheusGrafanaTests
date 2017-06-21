@@ -1,0 +1,6 @@
+instance:my_counter:rate5m = rate(go_goroutines{job="prometheus"}[5m])
+
+# You can use this new metric now in rules, alerts or graphs.
+instance:my_counter:predict_linear1d_1h_rate5m = 
+#  predict_linear(instance:my_counter:rate5m{job="prometheus"})[1d], 3600)
+   predict_linear(go_goroutines{job="prometheus"}[1d], 3600)

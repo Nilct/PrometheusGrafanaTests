@@ -43,14 +43,23 @@ Les fichiers sont dans `prometheus`
 **prometheus.yml** :
 
 * configuration générale
-* liste des règles (pour les alertes): `*.rules`
+* liste des règles (pour les alertes ou pour des fonctions PromQL): `*.rules`
 * configuration pour chaque moniteur
+
+Outil de vérification de la syntaxe des règles :
+
+``` sh
+go get github.com/prometheus/prometheus/cmd/promtool
+promtool check-rules /path/to/example.rules
+```
 
 ### -- Grafana
 
 Les fichiers sont dans `grafana`
 
-Les fichiers *.json sont des descriptions de **dashboards**
+Les fichiers *.json sont des descriptions de **dashboards**, qui seront chargés au lancement de Grafana.
+
+Dashboards prometheus : <https://grafana.com/dashboards?dataSource=prometheus>
 
 ### -- Alertmanager
 
@@ -65,6 +74,8 @@ Lancer, arréter:
 ``` sh
 docker-compose up -d
 docker-compose down --remove-orphans
+#ou 
+docker-compose rm
 ```
 
 ### -- Prometheus
@@ -86,6 +97,8 @@ Exemples avec **http_requests_total**
 Requêtes complexes :
 sum(rate(http_requests_total[5m])) by (job)
 
+TODO : exemple avec topk(3, sum(rate(instance_cpu_time_ns[5m])) by (app, proc))
+
 Description du langage **PromQL** : <https://prometheus.io/docs/querying/basics/>
 
 Création d'une alerte sur : rate(http_requests_total{job="prometheus"})
@@ -102,8 +115,20 @@ Etapes :
 
 Import Dashboard : `monitor_services.json`
 
-> Exemple de création d'un dashboard : TODO
-> Exemple de création d'une alerte : TODO
+> Exemple de création d'un dashboard
+> Exemple de création d'une alerte 
+
+Création d'un graphe : 
+`topk(3,codingame_my_computer_docker_container_memory)`
+
+
+Exploitation histogramme:
+`rate( go_gc_duration_seconds[5m])`
+
+Prédiction sur `rate(go_goroutines[5m])`
+
+Mettre X-Axis en mode *series*
+
 
 ## Création d'une métrique
 
@@ -122,5 +147,7 @@ Enregistrement du service
 Métriques visibles : http://localhost:9090/metrics
 
 
-
+Liens :
+* http://docs.grafana.org/v4.2/features/datasources/prometheus/
+* [Dashboards](https://grafana.com/dashboards?dataSource=prometheus)
 
